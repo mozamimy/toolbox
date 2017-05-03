@@ -4,7 +4,7 @@
 
 set -Cuex +H
 
-: ${DEST:?you should be set destination}
+: ${DEST:?you should set destination}
 
 normalized_dest=`readlink -f $DEST`
 bin_name=`basename bash/rename-with-uuid.sh .sh`
