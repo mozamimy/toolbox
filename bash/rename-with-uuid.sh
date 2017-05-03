@@ -4,7 +4,7 @@
 
 set -Cuex +H
 
-for filename in $*; do
+for filename in "$@"; do
   ext="${filename##*.}"
   mv $filename `uuidgen`.$ext
 done
