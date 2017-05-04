@@ -6,5 +6,5 @@ set -Cuex +H
 
 for filename in "$@"; do
   ext="${filename##*.}"
-  mv $filename `uuidgen`.$ext
+  mv "$filename" `uuidgen`.$ext
 done
