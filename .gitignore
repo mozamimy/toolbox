@@ -1,1 +1,4 @@
 rust/wakeup/target
+
+ruby/wakeup/client_secret.json
+ruby/wakeup/ring.mkv
