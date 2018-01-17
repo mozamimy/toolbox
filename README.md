@@ -1,6 +1,6 @@
 # toolbox
 
-My rough utilities.
+My small utilities.
 
 ## Install
 
