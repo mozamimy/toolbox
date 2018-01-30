@@ -7,4 +7,4 @@ kms_resp = kms.decrypt({
   ciphertext_blob: Base64.decode64(STDIN.read),
 })
 
-puts kms_resp.plaintext
+print kms_resp.plaintext
