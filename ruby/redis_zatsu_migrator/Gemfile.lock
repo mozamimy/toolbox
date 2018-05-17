@@ -1,13 +1,17 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    parallel (1.12.1)
     redis (4.0.1)
+    ruby-progressbar (1.9.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  parallel
   redis
+  ruby-progressbar
 
 BUNDLED WITH
    1.16.1
