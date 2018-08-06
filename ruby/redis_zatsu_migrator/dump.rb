@@ -18,7 +18,7 @@ raw_results = Parallel.map(redis_clients[0].keys(pattern), in_threads: thread_co
   {
     key: key,
     value: redis_clients[Parallel.worker_number].dump(key),
-    ttl: redis_clients[Parallel.worker_number].ttl(key),
+    ttl: redis_clients[Parallel.worker_number].pttl(key),
   }
 end
 
