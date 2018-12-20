@@ -50,7 +50,7 @@ end
 print 'Choose schedules (comma separated) > '
 input = gets
 target_schedules = input.split(',').map(&:strip).reject(&:empty?).map { |s| schedules['schedules'][Integer(s)] }
-puts "You choosed schedules #{target_schedules.map { |s| s['name']}.join(', ')}"
+puts "You chose schedules #{target_schedules.map { |s| s['name']}.join(', ')}"
 
 target_users_by_schedule = {}
 target_schedules.each do |schedule|
