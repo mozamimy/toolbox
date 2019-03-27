@@ -59,7 +59,7 @@ target_schedules.each do |schedule|
   users.each_with_index do |user, i|
     puts "#{i}: #{user['summary']} (#{user['id']})"
   end
-  print 'Chose EXCLUDED users (comma separated) > '
+  print 'Choose EXCLUDED users (comma separated) > '
   input = gets
   target_users = users - input.split(',').map(&:strip).reject(&:empty?).map { |s| users[Integer(s)] }
   puts "Target users are #{target_users.map { |u| u['summary'] }.join(', ')}"
