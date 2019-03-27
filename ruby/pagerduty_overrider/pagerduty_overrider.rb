@@ -59,7 +59,7 @@ target_schedules.each do |schedule|
   users.each_with_index do |user, i|
     puts "#{i}: #{user['summary']} (#{user['id']})"
   end
-  print 'Choose EXCLUDED users (comma separated) > '
+  print 'Chose EXCLUDED users (comma separated) > '
   input = gets
   target_users = users - input.split(',').map(&:strip).reject(&:empty?).map { |s| users[Integer(s)] }
   puts "Target users are #{target_users.map { |u| u['summary'] }.join(', ')}"
@@ -85,15 +85,15 @@ end
 
 print 'Input start day (e.g. 2018-12-29 09:30 +0900) > '
 start_time = Time.parse(gets)
-puts "You input is #{start_time} as start day"
+puts "Your input is #{start_time} as start day"
 
 print 'Input end day (e.g. 2019-01-03 09:30 +0900) > '
 end_time = Time.parse(gets)
-puts "You input is #{end_time} as end day"
+puts "Your input is #{end_time} as end day"
 
 print 'Input duration (secondes) (e.g. 86400) > '
 duration = Integer(gets.strip)
-puts "You input is #{duration} as duration"
+puts "Your input is #{duration} as duration"
 
 plan = {}
 target_schedules.each do |schedule|
