@@ -23,7 +23,7 @@ def describe_cache_parameters(pg)
   response.flat_map(&:parameters).group_by(&:parameter_name)
 end
 
-def compare(hx, hy)
+def compare(hx, hy, &block)
   diffs = []
 
   keys_only_hx = hx.keys - hy.keys
@@ -32,7 +32,7 @@ def compare(hx, hy)
     diffs << Diff.new(
       '-',
       key,
-      hx[key][0].parameter_value,
+      block ? block.call(hx[key]) : hx[key],
       nil,
     )
   end
@@ -41,18 +41,20 @@ def compare(hx, hy)
       '+',
       key,
       nil,
-      hy[key][0].parameter_value,
+      block ? block.call(hy[key]) : hy[key],
     )
   end
 
   common_keys = hx.keys & hy.keys
   common_keys.each do |key|
-    if hx[key][0].parameter_value != hy[key][0].parameter_value
+    before = block ? block.call(hx[key]) : hx[key]
+    after = block ? block.call(hy[key]) : hy[key]
+    if before != after
       diffs << Diff.new(
         '~',
         key,
-        hx[key][0].parameter_value,
-        hy[key][0].parameter_value,
+        before,
+        after,
       )
     end
   end
@@ -66,4 +68,4 @@ target_pg = ARGV[1]
 source = describe_cache_parameters(source_pg)
 target = describe_cache_parameters(target_pg)
 
-puts compare(source, target)
+puts compare(source, target) { |v| v[0].parameter_value }
