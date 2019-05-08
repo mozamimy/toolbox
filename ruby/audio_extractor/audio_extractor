@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+require 'erb'
+require 'yaml'
+
+prefix = ARGV[0]
+target_dir = ARGV[1]
+config_file = ARGV[2]
+dry_run = ARGV[3]
+
+metadata_template = YAML.load_file(config_file)
+
+Dir.glob('*.{mp4,flv,m4a}').each do |f|
+  part = f.match(/(\d+)話/)[1]
+  target = File.join(target_dir, "#{sprintf("%s%04d", prefix, part)}.m4a")
+  metadata = metadata_template.map { |key, value|
+    erb = ERB.new(value)
+    "-metadata \"#{key}\"=\"#{erb.result(binding)}\""
+  }.join(' ')
+
+  cmd = "ffmpeg -i \"#{f}\" -vn -acodec copy #{metadata} \"#{target}\""
+
+  if dry_run
+    puts cmd
+  else
+    system cmd
+  end
+end
