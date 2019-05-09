@@ -25,6 +25,7 @@ end
 
 def compare(hx, hy, &block)
   diffs = []
+  block ||= lambda { |v| v }
 
   keys_only_hx = hx.keys - hy.keys
   keys_only_hy = hy.keys - hx.keys
@@ -32,7 +33,7 @@ def compare(hx, hy, &block)
     diffs << Diff.new(
       '-',
       key,
-      block ? block.call(hx[key]) : hx[key],
+      block.call(hx[key]),
       nil,
     )
   end
@@ -41,14 +42,14 @@ def compare(hx, hy, &block)
       '+',
       key,
       nil,
-      block ? block.call(hy[key]) : hy[key],
+      block.call(hy[key]),
     )
   end
 
   common_keys = hx.keys & hy.keys
   common_keys.each do |key|
-    before = block ? block.call(hx[key]) : hx[key]
-    after = block ? block.call(hy[key]) : hy[key]
+    before = block.call(hx[key])
+    after = block.call(hy[key])
     if before != after
       diffs << Diff.new(
         '~',
