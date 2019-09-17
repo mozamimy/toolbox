@@ -51,6 +51,6 @@ normalized_total_quantity = instances.reduce(0) do |acc, i|
 end
 
 puts "\nTotal instance count: #{instances.count}"
-puts "Noarmalized total count: #{normalized_total_quantity}" 
+puts "Normalized total count: #{normalized_total_quantity}" 
 puts "    as #{instance_family}.small #{normalized_total_quantity / NORMALIZATION_FACTORS['small']}" 
 puts "    as #{instance_family}.large #{normalized_total_quantity / NORMALIZATION_FACTORS['large']}" 
