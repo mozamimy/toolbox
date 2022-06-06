@@ -5,4 +5,4 @@ authors = ["mozamimy (Moza USANE) <alice@mozami.me>"]
 
 [dependencies]
 imap = "0.3.1"
-openssl = "0.9.13"
+openssl = "0.10.9"
